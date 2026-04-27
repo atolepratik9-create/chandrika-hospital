@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandrika Hospital - Ravangaon</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1a6bb5;
+    --pink: #e03278;
+    --light-blue: #e8f4fd;
+    --light-pink: #fde8f0;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --white: #ffffff;
+    --bg: #f8fafc;
+    --shadow: 0 4px 24px rgba(26,107,181,0.10);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    box-shadow: 0 2px 12px rgba(26,107,181,0.10);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 68px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo img { height: 48px; }
+  .nav-logo span { font-weight: 700; font-size: 1.1rem; color: var(--blue); }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-book-btn {
+    background: var(--pink); color: #fff; border: none;
+    padding: 10px 22px; border-radius: 50px; font-size: 0.9rem;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
+    text-decoration: none;
+  }
+  .nav-book-btn:hover { background: #b0225e; }
+  .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--blue); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a6bb5 0%, #1557a0 60%, #e03278 100%);
+    color: #fff; padding: 64px 5% 56px;
+    display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-text { flex: 1; min-width: 280px; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block; background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 4px 16px; border-radius: 50px; font-size: 0.8rem;
+    font-weight: 600; margin-bottom: 16px; letter-spacing: 1px;
+  }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+  .hero p { font-size: 1rem; opacity: 0.88; margin-bottom: 28px; max-width: 440px; line-height: 1.7; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-white {
+    background: #fff; color: var(--blue); padding: 12px 28px;
+    border-radius: 50px; font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+  .btn-outline-white {
+    border: 2px solid #fff; color: #fff; padding: 12px 28px;
+    border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
+  .hero-logo { position: relative; z-index: 1; }
+  .hero-logo img { width: 200px; border-radius: 16px; background: #fff; padding: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
+
+  /* QUICK INFO STRIP */
+  .info-strip {
+    background: var(--white); display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 0;
+    box-shadow: var(--shadow);
+  }
+  .info-item {
+    flex: 1; min-width: 180px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 14px;
+    border-right: 1px solid #f0f0f0;
+  }
+  .info-item:last-child { border-right: none; }
+  .info-icon { font-size: 1.6rem; }
+  .info-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+  .info-val { font-size: 0.95rem; font-weight: 700; color: var(--blue); }
+
+  /* SECTION */
+  section { padding: 64px 5%; }
+  .section-title {
+    text-align: center; margin-bottom: 40px;
+  }
+  .section-title h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: var(--text);
+    margin-bottom: 8px;
+  }
+  .section-title p { color: var(--muted); font-size: 0.95rem; }
+  .title-line {
+    width: 56px; height: 4px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--pink));
+    margin: 10px auto 0;
+  }
+
+  /* SERVICES */
+  #services { background: var(--bg); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+  }
+  .service-card {
+    background: var(--white); border-radius: 16px; padding: 28px 22px;
+    box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s;
+    border-top: 4px solid var(--blue);
+    cursor: default;
+  }
+  .service-card:nth-child(even) { border-top-color: var(--pink); }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,107,181,0.15); }
+  .service-icon { font-size: 2rem; margin-bottom: 12px; }
+  .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--blue); }
+  .service-card:nth-child(even) h3 { color: var(--pink); }
+  .service-card ul { list-style: none; padding: 0; }
+  .service-card ul li { font-size: 0.82rem; color: var(--muted); padding: 3px 0; display: flex; align-items: flex-start; gap: 6px; }
+  .service-card ul li::before { content: '✓'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+  .service-card:nth-child(even) ul li::before { color: var(--pink); }
+
+  /* DOCTOR */
+  #doctor { background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-pink) 100%); }
+  .doctor-card {
+    max-width: 760px; margin: 0 auto;
+    background: var(--white); border-radius: 24px; box-shadow: var(--shadow);
+    display: flex; gap: 32px; align-items: center; padding: 36px;
+    flex-wrap: wrap;
+  }
+  .doctor-avatar {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--pink));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; flex-shrink: 0; color: #fff;
+  }
+  .doctor-info h2 { font-size: 1.5rem; font-weight: 800; color: var(--blue); }
+  .doctor-info .qual { font-size: 0.9rem; color: var(--pink); font-weight: 600; margin: 4px 0 14px; }
+  .doctor-info p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .doctor-contact a {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue); color: #fff; padding: 10px 22px;
+    border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .doctor-contact a:hover { background: #1557a0; }
+
+  /* VIDEOS */
+  #videos { background: var(--bg); }
+  .video-note {
+    text-align: center; background: var(--white); border-radius: 16px;
+    padding: 32px; box-shadow: var(--shadow); max-width: 600px; margin: 0 auto;
+  }
+  .video-note .play-icon { font-size: 3rem; margin-bottom: 12px; }
+  .video-note h3 { font-size: 1.1rem; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+  .video-note p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .video-placeholder {
+    background: var(--white); border-radius: 16px; padding: 28px;
+    box-shadow: var(--shadow); text-align: center;
+    border: 2px dashed #d1e9fc;
+  }
+  .video-placeholder .play { font-size: 2.5rem; color: var(--blue); }
+  .video-placeholder p { font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
+
+  /* BOOKING */
+  #booking { background: linear-gradient(135deg, var(--blue) 0%, #1557a0 100%); }
+  #booking .section-title h2 { color: #fff; }
+  #booking .section-title p { color: rgba(255,255,255,0.8); }
+  #booking .title-line { background: linear-gradient(90deg, #fff, var(--pink)); }
+  .booking-form {
+    max-width: 540px; margin: 0 auto;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px; padding: 36px; backdrop-filter: blur(8px);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 10px; padding: 10px 14px; font-size: 0.9rem;
+    color: #fff; font-family: 'Poppins', sans-serif;
+    outline: none; transition: border 0.2s;
+  }
+  .form-group input::placeholder, .form-group select option, .form-group textarea::placeholder { color: rgba(255,255,255,0.6); }
+  .form-group select option { color: var(--text); background: #fff; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #fff; }
+  .submit-btn {
+    width: 100%; background: var(--pink); color: #fff; border: none;
+    padding: 14px; border-radius: 50px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
+    font-family: 'Poppins', sans-serif;
+  }
+  .submit-btn:hover { background: #b0225e; transform: translateY(-1px); }
+
+  /* SUCCESS MSG */
+  .success-msg {
+    display: none; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 12px; padding: 18px; text-align: center; color: #fff;
+    font-weight: 600; margin-top: 14px;
+  }
+
+  /* REVIEWS */
+  #reviews { background: var(--bg); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .review-card {
+    background: var(--white); border-radius: 16px; padding: 24px;
+    box-shadow: var(--shadow); border-bottom: 4px solid var(--blue);
+    transition: transform 0.2s;
+  }
+  .review-card:nth-child(even) { border-bottom-color: var(--pink); }
+  .review-card:hover { transform: translateY(-3px); }
+  .stars { color: #f59e0b; font-size: 1rem; margin-bottom: 10px; }
+  .review-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 14px; font-style: italic; }
+  .reviewer { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+  .reviewer-loc { font-size: 0.75rem; color: var(--muted); }
+
+  /* MAP / CONTACT */
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .contact-info h3 { font-size: 1.1rem; font-weight: 700; color: var(--blue); margin-bottom: 20px; }
+  .contact-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+  .contact-item .ci-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .contact-item .ci-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+  .contact-item .ci-val { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+  .contact-item a { color: var(--blue); text-decoration: none; }
+  .map-placeholder {
+    background: var(--light-blue); border-radius: 16px; height: 260px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; border: 2px dashed #aad4f5;
+  }
+  .map-placeholder span { font-size: 2.5rem; }
+  .map-placeholder p { font-size: 0.85rem; color: var(--blue); font-weight: 600; }
+  .map-placeholder a {
+    background: var(--blue); color: #fff; padding: 10px 22px;
+    border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--text); color: rgba(255,255,255,0.7);
+    padding: 32px 5%; text-align: center; font-size: 0.82rem;
+  }
+  footer strong { color: #fff; }
+  footer .footer-links { display: flex; justify-content: center; gap: 20px; margin: 14px 0; flex-wrap: wrap; }
+  footer .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  footer .footer-links a:hover { color: #fff; }
+
+  /* FLOATING CALL */
+  .floating-call {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    background: var(--pink); color: #fff; padding: 14px 22px;
+    border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.92rem;
+    box-shadow: 0 4px 20px rgba(224,50,120,0.4);
+    display: flex; align-items: center; gap: 8px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(224,50,120,0.4); }
+    50% { box-shadow: 0 4px 32px rgba(224,50,120,0.7); }
+  }
+
+  /* MOBILE */
+  @media(max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .hero { padding: 40px 5% 36px; }
+    .hero-logo img { width: 140px; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .info-item { min-width: 140px; }
+    .doctor-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span>🏥 Chandrika Hospital</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#doctor">Doctor</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#booking" class="nav-book-btn">📅 Book Appointment</a>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">✦ विश्वास, सेवा आणि आधुनिक उपचार</div>
+    <h1>Chandrika Hospital<br>Ravangaon</h1>
+    <p>आधुनिक उपकरणे, अनुभवी डॉक्टर आणि रुग्णांच्या सेवेसाठी समर्पित — Ravangaon, Ta. Daund मध्ये आपल्या जवळच!</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-white">📅 Appointment घ्या</a>
+      <a href="tel:+918999300718" class="btn-outline-white">📞 Call Now</a>
+    </div>
+  </div>
+  <div class="hero-logo">
+    <img src="https://via.placeholder.com/200x200/ffffff/1a6bb5?text=CH" alt="Chandrika Hospital Logo" style="width:200px;border-radius:16px;background:#fff;padding:16px;box-shadow:0 8px 32px rgba(0,0,0,0.18);">
+    <!-- Replace above src with actual logo image path -->
+  </div>
+</section>
+
+<!-- QUICK INFO STRIP -->
+<div class="info-strip">
+  <div class="info-item">
+    <div class="info-icon">🕐</div>
+    <div>
+      <div class="info-label">OPD Timing</div>
+      <div class="info-val">9 AM – 8 PM</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">📞</div>
+    <div>
+      <div class="info-label">Helpline</div>
+      <div class="info-val"><a href="tel:+918999300718" style="color:var(--blue);text-decoration:none;">+91 89993 00718</a></div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">📍</div>
+    <div>
+      <div class="info-label">Location</div>
+      <div class="info-val">Ravangaon, Ta. Daund</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🚨</div>
+    <div>
+      <div class="info-label">Emergency</div>
+      <div class="info-val">24/7 Available</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-title">
+    <h2>आमच्या सेवा</h2>
+    <p>आधुनिक उपकरणे आणि तज्ञ उपचार — एकाच छताखाली</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>शॉकवेव्ह थेरपी</h3>
+      <ul>
+        <li>गुडघेदुखी, संधिवात</li>
+        <li>खांदा दुखणे</li>
+        <li>टाचदुखी / Plantar Fasciitis</li>
+        <li>मान व पाठदुखी</li>
+        <li>टेंडोनायटिस व मसल्स दुखणे</li>
+        <li>जुनाट वेदना जिथे औषधे काम करत नाहीत</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💡</div>
+      <h3>स्कॅनिंग लेझर थेरपी</h3>
+      <ul>
+        <li>संधिवात / गुडघेदुखी</li>
+        <li>Cervical / Lumbar Pain</li>
+        <li>Frozen Shoulder</li>
+        <li>टाचदुखी, स्नायू व टेंडन दुखणे</li>
+        <li>जुनाट वेदना – औषधाशिवाय आराम</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🩻</div>
+      <h3>डिजिटल एक्स-रे</h3>
+      <ul>
+        <li>कमी Radiation – सुरक्षित</li>
+        <li>जलद व स्पष्ट रिपोर्ट</li>
+        <li>त्वरित निदानासाठी</li>
+        <li>सोयीस्कर प्रक्रिया</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <h3>Preventive Health Checkup</h3>
+      <ul>
+        <li>एकूण ६८ तपासण्या</li>
+        <li>१२ Profiles</li>
+        <li>फक्त ₹२५०० मध्ये</li>
+        <li>लवकर निदान – Pro Aarogyam 1.3</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🩺</div>
+      <h3>General OPD</h3>
+      <ul>
+        <li>ताप, सर्दी, खोकला</li>
+        <li>साखर (Diabetes) नियंत्रण</li>
+        <li>BP व्यवस्थापन</li>
+        <li>लहान मुलांचे आजार</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💉</div>
+      <h3>Osteoarthritis उपचार</h3>
+      <ul>
+        <li>वयोवृद्धांसाठी योग्य</li>
+        <li>PRP थेरपी</li>
+        <li>Viscosupplementation</li>
+        <li>शस्त्रक्रियाशिवाय आराम</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTOR -->
+<section id="doctor">
+  <div class="section-title">
+    <h2>आमचे डॉक्टर</h2>
+    <p>अनुभवी, विश्वासू आणि रुग्णांसाठी समर्पित</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="doctor-card">
+    <div class="doctor-avatar">👨‍⚕️</div>
+    <div class="doctor-info">
+      <h2>Dr. Prafulla Bidwe</h2>
+      <div class="qual">MBBS | General Physician</div>
+      <p>
+        डॉ. प्रफुल्ल बिडवे हे Ravangaon, Ta. Daund येथे Chandrika Hospital चालवतात. 
+        त्यांना रुग्णांच्या सेवेचा दीर्घ अनुभव असून ते आधुनिक उपचार पद्धतींमध्ये तज्ञ आहेत. 
+        शॉकवेव्ह थेरपी, लेझर थेरपी आणि Osteoarthritis उपचारात त्यांचे विशेष कौशल्य आहे.
+      </p>
+      <div class="doctor-contact">
+        <a href="tel:+918999300718">📞 +91 89993 00718</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-title">
+    <h2>माहितीपर व्हिडिओ</h2>
+    <p>डॉक्टरांचे मार्गदर्शन — आजारांबद्दल सखोल माहिती</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="video-grid">
+    <div class="video-placeholder">
+      <div class="play">▶️</div>
+      <p style="font-weight:700;color:var(--blue);margin-top:8px;">वयोवृद्धांमध्ये गुडघेदुखी</p>
+      <p>Osteoarthritis – योग्य उपचार पर्याय | Dr. Prafulla Bidwe</p>
+    </div>
+    <div class="video-placeholder">
+      <div class="play">▶️</div>
+      <p style="font-weight:700;color:var(--pink);margin-top:8px;">डायबिटीस – सामान्य गैरसमज</p>
+      <p>खरे माहिती जाणून घ्या | Dr. Prafulla Bidwe</p>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:20px;font-size:0.82rem;color:var(--muted);">
+    📱 अधिक व्हिडिओसाठी आमचे YouTube / Social Media Page Follow करा
+  </p>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-title">
+    <h2>Online Appointment बुक करा</h2>
+    <p>तुमचा वेळ वाचवा — घरबसल्या Appointment घ्या</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="booking-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>पूर्ण नाव *</label>
+        <input type="text" id="fname" placeholder="तुमचे नाव">
+      </div>
+      <div class="form-group">
+        <label>मोबाइल नंबर *</label>
+        <input type="tel" id="fphone" placeholder="+91 XXXXX XXXXX">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>वय</label>
+        <input type="number" id="fage" placeholder="वय (वर्षे)">
+      </div>
+      <div class="form-group">
+        <label>तारीख *</label>
+        <input type="date" id="fdate">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>सेवा निवडा</label>
+      <select id="fservice">
+        <option value="">-- सेवा निवडा --</option>
+        <option>General OPD</option>
+        <option>शॉकवेव्ह थेरपी</option>
+        <option>स्कॅनिंग लेझर थेरपी</option>
+        <option>डिजिटल एक्स-रे</option>
+        <option>Preventive Health Checkup</option>
+        <option>Osteoarthritis उपचार</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>समस्या / नोट्स</label>
+      <textarea id="fnotes" rows="3" placeholder="तुमची समस्या थोडक्यात सांगा..."></textarea>
+    </div>
+    <button class="submit-btn" onclick="submitForm()">✅ Appointment बुक करा</button>
+    <div class="success-msg" id="successMsg">
+      🎉 धन्यवाद! तुमची Appointment नोंदवली गेली आहे.<br>आम्ही लवकरच तुम्हाला संपर्क करू.
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-title">
+    <h2>रुग्णांचे अनुभव</h2>
+    <p>आमच्या रुग्णांनी सांगितलेले त्यांचे अनुभव</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"डॉ. बिडवे यांनी माझ्या गुडघेदुखीवर शॉकवेव्ह थेरपीने खूप चांगला उपचार केला. ३ sessions मध्येच खूप फरक जाणवला!"</p>
+      <div class="reviewer">रमेश पाटील</div>
+      <div class="reviewer-loc">📍 Daund</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"आमच्या गावाजवळच इतकी आधुनिक सुविधा मिळाल्याचा खूप आनंद आहे. डॉक्टर खूप समजूतदार आणि親切 आहेत."</p>
+      <div class="reviewer">सुनीता देशमुख</div>
+      <div class="reviewer-loc">📍 Ravangaon</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Diabetes बद्दलचा व्हिडिओ पाहून खूप माहिती मिळाली. क्लिनिकमध्ये आल्यावर डॉक्टरांनी सर्व नीट समजावून सांगितले."</p>
+      <div class="reviewer">महेश जाधव</div>
+      <div class="reviewer-loc">📍 Yavat</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Health Checkup package खूप affordable आहे आणि रिपोर्ट लवकर मिळाला. Digital X-Ray ची सुविधा इथे असणे खूप उपयुक्त आहे."</p>
+      <div class="reviewer">वंदना कुलकर्णी</div>
+      <div class="reviewer-loc">📍 Kedgaon</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-title">
+    <h2>आमच्याशी संपर्क करा</h2>
+    <p>आम्ही नेहमी तुमच्यासाठी उपलब्ध आहोत</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>संपर्क माहिती</h3>
+      <div class="contact-item">
+        <div class="ci-icon">📍</div>
+        <div>
+          <div class="ci-label">पत्ता</div>
+          <div class="ci-val">Chandrika Hospital, Ravangaon, Ta. Daund, Pune District</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">📞</div>
+        <div>
+          <div class="ci-label">फोन नंबर</div>
+          <div class="ci-val"><a href="tel:+918999300718">+91 89993 00718</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">🕐</div>
+        <div>
+          <div class="ci-label">OPD वेळ</div>
+          <div class="ci-val">सोमवार – शनिवार: सकाळी ९ ते रात्री ८<br>रविवार: सकाळी ९ ते दुपारी १</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">👨‍⚕️</div>
+        <div>
+          <div class="ci-label">डॉक्टर</div>
+          <div class="ci-val">Dr. Prafulla Bidwe (MBBS)</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="map-placeholder">
+        <span>🗺️</span>
+        <p>Chandrika Hospital, Ravangaon</p>
+        <p style="font-size:0.78rem;color:var(--muted);">Ta. Daund, Pune District</p>
+        <a href="https://maps.google.com/?q=Ravangaon+Daund" target="_blank">📍 Google Maps वर पाहा</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Chandrika Hospital</strong><br>
+  Dr. Prafulla Bidwe (MBBS) | Ravangaon, Ta. Daund, Pune
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#doctor">Doctor</a>
+    <a href="#booking">Appointment</a>
+    <a href="#reviews">Reviews</a>
+    <a href="tel:+918999300718">📞 Call</a>
+  </div>
+  <p>© 2025 Chandrika Hospital. All rights reserved.</p>
+</footer>
+
+<!-- FLOATING CALL BUTTON -->
+<a href="tel:+918999300718" class="floating-call">📞 Call Now</a>
+
+<script>
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '68px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = '#fff';
+    links.style.padding = '16px 5%';
+    links.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+  }
+
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const age = document.getElementById('fage').value.trim();
+    const date = document.getElementById('fdate').value;
+    const service = document.getElementById('fservice').value;
+    const notes = document.getElementById('fnotes').value.trim();
+    if (!name || !phone || !date) {
+      alert('कृपया नाव, मोबाइल नंबर आणि तारीख भरा.');
+      return;
+    }
+    document.getElementById('successMsg').style.display = 'block';
+    // Automatically send appointment details to doctor via WhatsApp
+    const msg = `🏥 *नवीन Appointment - Chandrika Hospital*%0A%0A👤 *नाव:* ${name}%0A📱 *Phone:* ${phone}%0A🎂 *वय:* ${age || 'नमूद नाही'}%0A📅 *तारीख:* ${date}%0A🩺 *सेवा:* ${service || 'नमूद नाही'}%0A📝 *समस्या/नोट्स:* ${notes || 'नाही'}%0A%0Aकृपया रुग्णाला Appointment Confirm करा.`;
+    setTimeout(() => {
+      window.open(`https://wa.me/918999300718?text=${msg}`, '_blank');
+    }, 800);
+  }
+
+  // Set min date to today
+  const dateInput = document.getElementById('fdate');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+  }
+</script>
+</body>
+</html>
